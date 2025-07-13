@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Program 4</title>
+	<style type="text/css">
+		canvas{
+			border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<h1>Create your own scene!</h1>
+	<h2>Instructions</h2>
+	<pre>
+	Draw a curve by left clicking on the left canvas, and then right click to finalize it. Once you've finalized your curve, 
+choose an amount of rotations and whether or not to draw end caps, and then generate your mesh! Once generated, you can
+download the coordinate and polygon files of the mesh.
+	Once your SOR is generated, several instances of the object will appear on the screen that you can freely manipulate. 
+Hold left click to select and drag the option around, after which the object can be rotated with rightmouse and scaled by 
+holding middle mouse (drag up/down to scale length and left/right for radius)
+	Additionally, the user can toggle both a point and directional lightsource, move the x-y value of point light, toggle ambient 
+and specular lighting effects, change the shininess of the shape, and choose between flat, Gouraud, and Phong shading.
+After achieving a desired rendering, the user can rotate, zoom, and pan the camera around the scene.
+	</pre>
+	<canvas id = "drawing-surface"></canvas>
+	<canvas id = "render-surface"></canvas>
+	<script defer src="canvas.js"></script>
+	<h2>Mesh Options</h2>
+	<br>
+	<label for="Rotations">Number of rotations (between 3 and 32)</label>
+	<input type="number" id="rot" name="Rotations" min="3" max="32" value = "3">
+	<label for="endcaps">Draw endcaps?</label>
+	<input type="checkbox" name="endcaps" id="endcaps" value="drawCaps" checked>
+	<label for="endcaps">Draw as wireframe?</label>
+	<input type="checkbox" name="wireframe" id="wireframe" value="drawFrame">
+	<button onclick="SORGen()">Draw Mesh</button>
+	<button onclick="newInstance()">Create New Instance</button>
+	<a href="#" id="cdl" download="objname.coor">
+		<button type="button">Download .coor</button> 
+	<a>
+	<a href="#" id="pdl" download="objname.poly">
+		<button type="button">Download .poly</button> 
+	<a>
+	<h2>Lighting Options</h2>
+	<br>
+	<label for="dilight">Directional lightsource?</label>
+	<input type="checkbox" name="dilight" id="dilight" value="dilight" checked>
+	<label for="pointlight">Point lightsource?</label>
+	<input type="checkbox" name="pointlight" id="pointlight" value="pointlight">
+	<label for="ambient">Add ambient lighting?</label>
+	<input type="checkbox" name="ambient" id="ambient" value="ambient" checked>
+	<label for="diffuse">Add diffuse lighting?</label>
+	<input type="checkbox" name="diffuse" id="diffuse" value="diffuse" checked>
+	<label for="specular">Add specular lighting?</label>
+	<input type="checkbox" name="specular" id="specular" value="specular">
+	<label for="shine">Control shininess of objects</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="1" max="32" value="4" class="slider" id="shine">
+	</div>
+	<br>
+	<label for="lightx">Point light X</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="0" max="18" value="9" class="slider" id="lightx">
+	</div>
+	<label for="lighty">Point light Y</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="0" max="18" value="18" class="slider" id="lighty">
+	</div>
+	<br>
+	<label for="Shading">Choose a shading style:</label>
+	<div class="dropdown" style="display: inline">
+	    <div class="styled-select">
+	    	<select id="Shading" name="Shading">
+		        <option value="Flat">Flat</option>
+		        <option value="Gouraud">Gouraud</option>
+		        <option value="Phong">Phong</option>
+	    	</select>
+	    </div>
+	</div>
+	<h2>Camera Options</h2>
+	<label for="ortho">Orthagraphic view?</label>
+	<input type="checkbox" name="ortho" id="ortho" value="ortho">
+	<label for="fov">Camera FOV</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="30" max="60" value="45" class="slider" id="fov">
+	</div>
+	<label for="hor">Camera Horizontal Angle</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="-180" max="180" value="0" class="slider" id="hor">
+	</div>
+	<label for="ver">Camera Vertical Angle</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="-60" max="90" value="0" class="slider" id="ver">
+	</div>
+	<br>
+	<label for="pX">Camera Pan X</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="-80" max="80" value="0" class="slider" id="pX">
+	</div>
+	<label for="pY">Camera Pan Y</label>
+	<div class="slidecontainer" style="display: inline">
+  		<input type="range" min="-80" max="80" value="0" class="slider" id="pY">
+	</div>
+	<button onclick="camreset()">Reset Camera</button>
+
+
+
+
+
+</body>
+</html>
